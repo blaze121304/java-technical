@@ -1,5 +1,6 @@
 package com.rusty.api.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ public class CouponCountRepository {
 
     private final RedisTemplate<String,String> redisTemplate;
 
+    @Autowired
     public CouponCountRepository(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
