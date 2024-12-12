@@ -18,9 +18,8 @@ public class ApplyService {
     }
 
     public void apply(Long userId){
-        //redis : incr
-        //long count  = couponRepository.count();
-        Long count = couponCountRepository.increment();
+        //long count  = couponRepository.count();           //한번 응모시
+        Long count = couponCountRepository.increment();     //백번 응모시
 
         if(count > 100){
             return;
