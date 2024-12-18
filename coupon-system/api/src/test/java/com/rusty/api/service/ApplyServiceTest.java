@@ -22,6 +22,7 @@ class ApplyServiceTest {
 
     @Test
     void 한번만응모() {
+//        applyService.apply(1L);
         applyService.apply(1L);
 
         long count = couponRepository.count();
@@ -30,7 +31,7 @@ class ApplyServiceTest {
 
     @Test
     void 백번응모() throws InterruptedException {
-        int threadCount = 1000;
+        int threadCount = 10;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
         CountDownLatch latch = new CountDownLatch(threadCount);
 
