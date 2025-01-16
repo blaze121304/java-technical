@@ -10,6 +10,7 @@
       <list>
         <option value="$PROJECT_DIR$/ticket-sync/pom.xml" />
         <option value="$PROJECT_DIR$/coupon-system/api/pom.xml" />
+        <option value="$PROJECT_DIR$/replication/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
