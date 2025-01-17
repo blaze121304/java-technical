@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface TicketJpaDao extends CrudRepository<Ticket, Integer> {
 
     Ticket findByEmail(String email);
+
 }

@@ -3,12 +3,10 @@ package com.rusty.replication.controller;
 import com.rusty.replication.domain.model.Ticket;
 import com.rusty.replication.domain.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
 1. 티켓 생성
@@ -22,7 +20,11 @@ import java.util.List;
 public class TicketController {
 
     @Autowired
-    private TicketService ticketService;
+    private final TicketService ticketService;
+
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
 
     @GetMapping("/getAllTickets")
     public List<Ticket> getAllTickets(){
@@ -30,19 +32,18 @@ public class TicketController {
     }
 
     @GetMapping("/getTicketById/{ticketId}")
-    public Ticket getTicketById(@PathVariable Integer ticketId){
-        return ticketBookingService.findTicketById(ticketId);
+    public Optional<Ticket> getTicketById(@PathVariable Integer ticketId){
+        return ticketService.findTicketById(ticketId);
     }
 
-    public String getTicket() {
-
-        return "";
+    @GetMapping("/getTicketByEmail/{email:.+}")
+    public Ticket getTicketByEmail(@PathVariable String email){
+        return ticketService.findTicketByEmail(email);
     }
 
-    public String setTicket() {
-
-
-        return "";
+    @PostMapping("/createTicket")
+    public Ticket createTicket(@RequestBody Ticket ticket){
+        return ticketService.createTicket(ticket);
     }
 
 
