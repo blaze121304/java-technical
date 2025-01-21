@@ -1,13 +1,14 @@
 package com.rusty.replication.domain.service.impl;
 
-import app.common.search.PageSearchResult;
-import app.dto.ProductDto;
-import app.exception.ResourceNotFoundException;
-import app.model.Product;
-import app.repository.ProductRepository;
-import app.search.ProductSearchCriteria;
-import app.service.ProductService;
-import app.validation.ProductDtoValidator;
+
+import com.rusty.replication.common.exception.ResourceNotFoundException;
+import com.rusty.replication.common.search.PageSearchResult;
+import com.rusty.replication.common.search.ProductSearchCriteria;
+import com.rusty.replication.common.validation.ProductDtoValidator;
+import com.rusty.replication.domain.dto.ProductDto;
+import com.rusty.replication.domain.model.Product;
+import com.rusty.replication.domain.service.ProductService;
+import com.rusty.replication.repository.ProductRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,13 +22,11 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductDtoValidator productDtoValidator;
 
-    @Autowired
-    public ProductServiceImpl(
-            ProductRepository productRepository,
-            ProductDtoValidator productDtoValidator) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductDtoValidator productDtoValidator) {
         this.productRepository = productRepository;
         this.productDtoValidator = productDtoValidator;
     }
+
 
     @Override
     public ProductDto findById(Long id) {

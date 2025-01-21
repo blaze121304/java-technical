@@ -1,9 +1,12 @@
 package com.rusty.replication.controller;
 
 
+import com.rusty.replication.common.search.PageSearchResult;
+import com.rusty.replication.common.search.ProductSearchCriteria;
+import com.rusty.replication.common.search.SearchRequest;
+import com.rusty.replication.common.utils.SearchUtils;
 import com.rusty.replication.domain.dto.ProductDto;
 import com.rusty.replication.domain.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +18,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }

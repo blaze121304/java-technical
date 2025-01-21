@@ -1,9 +1,8 @@
 package com.rusty.replication.domain.service;
 
-import app.common.search.PageSearchResult;
-import app.dto.ProductDto;
-import app.search.ProductSearchCriteria;
-
+import com.rusty.replication.common.search.PageSearchResult;
+import com.rusty.replication.common.search.ProductSearchCriteria;
+import com.rusty.replication.domain.dto.ProductDto;
 import java.util.List;
 
 public interface ProductService {
