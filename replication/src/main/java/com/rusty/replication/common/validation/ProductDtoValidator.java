@@ -22,11 +22,13 @@ public class ProductDtoValidator implements BaseValidator<ProductDto> {
 
     @Override
     public void validate(ProductDto obj) {
+        //에러로 처리해도 된다.
         validateUniqueCode(obj);
     }
 
     private void validateUniqueCode(ProductDto productDto) {
 
+        //데이터베이스에서 해당 코드에 대한 기존 레코드를 검색.
         Product product = this.productRepository
                 .findByCode(productDto.getCode())
                 .orElse(null);

@@ -4,7 +4,7 @@ package com.rusty.replication.repository.impl;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.*;
 import com.rusty.replication.common.search.PageSearchResult;
 import com.rusty.replication.common.search.ProductSearchCriteria;
 import com.rusty.replication.common.search.QueryExecutor;
@@ -27,7 +27,7 @@ public class ProductRepositoryImpl extends QueryExecutor implements ProductRepos
     private EntityManager entityManager;
 
     @Override
-    public PageSearchResult<Product> search(ProductSearchCriteria criteria) {
+    public PageSearchResCult<Product> search(ProductSearchCriteria criteria) {
         JPAQuery<Product> query = new JPAQuery<Product>(entityManager)
                 .from(qProduct)
                 .where(predicateOf(criteria))

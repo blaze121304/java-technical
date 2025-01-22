@@ -11,6 +11,7 @@ import com.rusty.replication.domain.service.ProductService;
 import com.rusty.replication.repository.ProductRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,10 +49,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto save(ProductDto productDto) {
-        productDtoValidator.validate(productDto);
+        productDtoValidator.validate(productDto);   //밸리데이션 체크가 효율적인가? 생각해볼 부분
         Product product = this.dtoToEntity(productDto);
-        Product savedProduct = this.productRepository.save(product);
-        return new ProductDto(savedProduct);
+        try{
+            Product savedProduct = this.productRepository.save(product);
+            return new ProductDto(savedProduct);
+        } catch (Exception e) {
+            throw new DataIntegrityViolationException("Primary key violation");//그냥 이렇게 처리하는게..
+        }
+
     }
 
     @Override

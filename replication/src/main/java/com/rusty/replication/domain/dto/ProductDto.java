@@ -18,7 +18,8 @@ public class ProductDto {
     private String description;
     private MeasurementUnit measurementUnit;
 
-    public ProductDto(Product product) {
-        BeanUtils.copyProperties(product, this);
+    public ProductDto(Product product){
+        BeanUtils.copyProperties(product,this);
     }
+
 }
