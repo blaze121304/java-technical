@@ -3,8 +3,8 @@ package com.rusty.replication.common.search;
 import com.querydsl.jpa.impl.JPAQuery;
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 

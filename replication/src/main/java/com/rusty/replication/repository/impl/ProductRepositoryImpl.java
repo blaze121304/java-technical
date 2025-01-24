@@ -15,8 +15,8 @@ import com.rusty.replication.repository.ProductRepositoryCustom;
 import io.micrometer.common.util.StringUtils;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.HashMap;
 
 public class ProductRepositoryImpl extends QueryExecutor implements ProductRepositoryCustom {
@@ -27,7 +27,7 @@ public class ProductRepositoryImpl extends QueryExecutor implements ProductRepos
     private EntityManager entityManager;
 
     @Override
-    public PageSearchResCult<Product> search(ProductSearchCriteria criteria) {
+    public PageSearchResult<Product> search(ProductSearchCriteria criteria) {
         JPAQuery<Product> query = new JPAQuery<Product>(entityManager)
                 .from(qProduct)
                 .where(predicateOf(criteria))
