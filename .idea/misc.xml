@@ -15,6 +15,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/replication/pom.xml" />
         <option value="$PROJECT_DIR$/ticket-sync/pom.xml" />
       </set>
     </option>
