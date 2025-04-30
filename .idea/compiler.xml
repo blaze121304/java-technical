@@ -9,7 +9,18 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api" />
       </profile>
-      <profile name="Annotation profile for querydsl" enabled="true">
+      <profile name="Annotation profile for datasource-single" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath>
+          <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="datasource-single" />
+        <module name="replication" />
+      </profile>
+      <profile name="Annotation profile for datasource-multi" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -17,7 +28,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
-        <module name="replication" />
+        <module name="datasource-multi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,6 +38,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api" options="-parameters" />
+      <module name="datasource-multi" options="-parameters" />
+      <module name="datasource-single" options="-parameters" />
       <module name="querydsl" options="-parameters" />
       <module name="replication" options="-parameters" />
     </option>

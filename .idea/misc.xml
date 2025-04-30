@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/ticket-sync/pom.xml" />
         <option value="$PROJECT_DIR$/coupon-system/api/pom.xml" />
         <option value="$PROJECT_DIR$/replication/pom.xml" />
+        <option value="$PROJECT_DIR$/datasource-single/pom.xml" />
+        <option value="$PROJECT_DIR$/datasource-multi/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
