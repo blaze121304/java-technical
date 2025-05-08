@@ -1,0 +1,8 @@
+###
+http://localhost:8080/current
+###
+http://localhost:8080/data
+###
+POST http://localhost:8080/switch/primary
+###
+POST http://localhost:8080/switch/secondary

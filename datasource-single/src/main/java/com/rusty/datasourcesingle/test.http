@@ -1,0 +1,8 @@
+###
+GET http://localhost:8081/api/database/current
+
+###
+GET http://localhost:8081/api/database/data
+
+###
+PUT http://localhost:8081/api/database/switch/primary
