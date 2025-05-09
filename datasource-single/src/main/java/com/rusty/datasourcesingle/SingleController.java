@@ -14,17 +14,23 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/database")
-@RequiredArgsConstructor
 public class SingleController {
 
     private final DatabaseConnectionManager connectionManager;
     private final JdbcTemplate jdbcTemplate;
+
+
+    public SingleController(DatabaseConnectionManager connectionManager, JdbcTemplate jdbcTemplate) {
+        this.connectionManager = connectionManager;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @PutMapping("/switch/{type}")
     public ResponseEntity<DatabaseSwitchResponse> switchDatabase(@PathVariable String type) {
         try {
             DbType selectedDb = DbType.valueOf(type.toUpperCase());
             connectionManager.switchDatabase(selectedDb);
+            DbContextHolderThread.setCurrentDb(selectedDb);
 
             return ResponseEntity.ok(DatabaseSwitchResponse.builder()
                     .status("SUCCESS")
