@@ -5,11 +5,13 @@ import com.rusty.datasourcesingle.dbconfig.DatabaseSwitchResponse;
 import com.rusty.datasourcesingle.dbconfig.DbContextHolderThread;
 import com.rusty.datasourcesingle.dbconfig.DbType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,8 +31,9 @@ public class SingleController {
     public ResponseEntity<DatabaseSwitchResponse> switchDatabase(@PathVariable String type) {
         try {
             DbType selectedDb = DbType.valueOf(type.toUpperCase());
+
             connectionManager.switchDatabase(selectedDb);
-            DbContextHolderThread.setCurrentDb(selectedDb);
+         //   DbContextHolderThread.setCurrentDb(selectedDb);
 
             return ResponseEntity.ok(DatabaseSwitchResponse.builder()
                     .status("SUCCESS")
@@ -64,7 +67,6 @@ public class SingleController {
             // 현재 설정된 데이터베이스에서 데이터 조회
             var result = jdbcTemplate.queryForList("select DATABASE()");
             return ResponseEntity.ok(Map.of(
-                    "currentDb", DbContextHolderThread.getCurrentDb(),
                     "data", result
             ));
         } catch (Exception e) {

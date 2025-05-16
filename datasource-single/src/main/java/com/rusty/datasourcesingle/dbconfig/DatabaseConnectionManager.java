@@ -45,8 +45,12 @@ public class DatabaseConnectionManager {
     @Value("${spring.datasource.primary.driver-class-name}")
     private String secondaryDriverClassName;
 
+    @Value("default.db")
+    private String defaultDb;
+
     @PostConstruct
     public void init() {
+        //switchDatabase(DbType.valueOf(defaultDb));
         switchDatabase(DbType.PRIMARY);
     }
 
