@@ -27,6 +27,36 @@ public class SingleController {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @PostMapping("/stop")
+    public ResponseEntity<DatabaseSwitchResponse> stopDatabaseConnection() {
+        try {
+            var result = connectionManager.resetConnection();
+
+            if (result.success()) {
+                return ResponseEntity.ok(DatabaseSwitchResponse.builder()
+                        .status("SUCCESS")
+                        .message("데이터베이스 연결이 성공적으로 중지되었습니다")
+                        .currentDatabase("NONE")
+                        .timestamp(LocalDateTime.now().toString())
+                        .build());
+            } else {
+                return ResponseEntity.internalServerError().body(DatabaseSwitchResponse.builder()
+                        .status("ERROR")
+                        .message("데이터베이스 연결 중지 실패: " + result.message())
+                        .currentDatabase(result.currentDb() != null ? result.currentDb().toString() : "UNKNOWN")
+                        .timestamp(LocalDateTime.now().toString())
+                        .build());
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(DatabaseSwitchResponse.builder()
+                    .status("ERROR")
+                    .message("데이터베이스 연결 중지 중 오류 발생: " + e.getMessage())
+                    .currentDatabase("UNKNOWN")
+                    .timestamp(LocalDateTime.now().toString())
+                    .build());
+        }
+    }
+
     @PutMapping("/switch/{type}")
     public ResponseEntity<DatabaseSwitchResponse> switchDatabase(@PathVariable String type) {
         try {

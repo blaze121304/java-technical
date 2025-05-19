@@ -63,6 +63,38 @@ public class DatabaseConnectionManager {
         }
     }
 
+
+    public DatabaseConnectionResult resetConnection() {
+        synchronized (lock) {
+            try {
+                // ThreadLocal 컨텍스트 초기화
+                DbContextHolderThread.clear();
+
+                // 현재 데이터소스가 존재하면 안전하게 종료
+                if (currentDataSource != null) {
+                    currentDataSource.close();
+                    currentDataSource = null;
+                }else{
+                    return new DatabaseConnectionResult(true,
+                            "종료할 DB가 없습니다.",
+                            null);
+                }
+
+                // 현재 DB 타입 초기화
+                currentDbType = null;
+
+                return new DatabaseConnectionResult(true,
+                        "데이터베이스 연결이 성공적으로 초기화되었습니다.",
+                        null);
+
+            } catch (Exception e) {
+                return new DatabaseConnectionResult(false,
+                        "데이터베이스 연결 초기화 실패: " + e.getMessage(),
+                        currentDbType);
+            }
+        }
+    }
+
     public DatabaseConnectionResult switchDatabase(DbType targetDb) {
         synchronized (lock) {
             HikariDataSource newDataSource = null;
